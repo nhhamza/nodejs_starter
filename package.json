@@ -19,8 +19,6 @@
   "dependencies": {
     "-": "0.0.1",
     "bcrypt": "^5.0.1",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.1",
     "class-validator-jsonschema": "^3.0.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
@@ -40,7 +38,11 @@
     "sequelize": "^6.21.1",
     "swagger-ui-express": "^4.1.6",
     "winston": "^3.3.3",
-    "winston-daily-rotate-file": "^4.5.5"
+    "winston-daily-rotate-file": "^4.5.5",
+    "class-transformer": "^0.5.1",
+        "class-transformer3": "npm:class-transformer@^0.3.1",
+        "class-validator": "^0.13.2",
+        "class-validator12": "npm:class-validator@^0.12.2",
   },
   "devDependencies": {
     "@swc/cli": "^0.1.51",
