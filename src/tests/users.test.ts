@@ -55,7 +55,7 @@ describe('Testing Users', () => {
   });
 
   describe('[DELETE] /users/:id', () => {
-    it('response statusCode 200 / deletedd', () => {
+    it('response statusCode 200 / deleted', () => {
       const userId = 1;
 
       const app = new App([UsersController]);
