@@ -12,7 +12,7 @@ export interface Database {
 const sequelizeInstance = new Sequelize(databaseConfig.DB, databaseConfig.USER, databaseConfig.PASSWORD, {
   host: databaseConfig.HOST,
   dialect: databaseConfig.dialect,
-  operatorsAliases: false,
+  // operatorsAliases: false,
 
   pool: {
     max: databaseConfig.pool.max,
