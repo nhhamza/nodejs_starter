@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { defaultMetadataStorage } from 'class-transformer';
+import { defaultMetadataStorage } from 'class-transformer/cjs/storage'
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
@@ -18,6 +18,7 @@ class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
+  
 
   constructor(Controllers: Function[]) {
     this.app = express();
@@ -28,6 +29,7 @@ class App {
     this.initializeRoutes(Controllers);
     this.initializeSwagger(Controllers);
     this.initializeErrorHandling();
+    
   }
 
   public listen() {
@@ -66,7 +68,7 @@ class App {
 
   private initializeSwagger(controllers: Function[]) {
     const schemas = validationMetadatasToSchemas({
-      classTransformerMetadataStorage: defaultMetadataStorage,
+       classTransformerMetadataStorage: defaultMetadataStorage,
       refPointerPrefix: '#/components/schemas/',
     });
 

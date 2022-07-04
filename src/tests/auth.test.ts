@@ -11,8 +11,8 @@ describe('Testing Auth', () => {
   describe('[POST] /signup', () => {
     it('response should have the Create userData', () => {
       const userData: CreateUserDto = {
-        email: 'test@email.com',
-        password: 'q1w2e3r4',
+        email: 'user@email.com',
+        password: '123456',
       };
 
       const app = new App([AuthController]);
@@ -23,11 +23,12 @@ describe('Testing Auth', () => {
   describe('[POST] /login', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
       const userData: CreateUserDto = {
-        email: 'lim@gmail.com',
-        password: 'q1w2e3r4',
+        email: 'user1@email.com',
+        password: '123456',
       };
 
       const app = new App([AuthController]);
+     
       return request(app.getServer())
         .post('/login')
         .send(userData)
@@ -36,14 +37,29 @@ describe('Testing Auth', () => {
   });
 
   // error: StatusCode : 404, Message : Authentication token missing
-  // describe('[POST] /logout', () => {
-  //   it('logout Set-Cookie Authorization=; Max-age=0', () => {
-  //     const authRoute = new AuthRoute();
-  //     const app = new App([authRoute]);
+  describe('[POST] /logout', ()  => {
+    it('logout Set-Cookie Authorization=; Max-age=0', async () => {
+      const app = new App([AuthController]);
 
-  //     return request(app.getServer())
-  //       .post('/logout')
-  //       .expect('Set-Cookie', /^Authorization=\;/);
-  //   });
-  // });
+      let token = "";
+
+      const userData: CreateUserDto = {
+        email: 'user1@email.com',
+        password: '123456',
+      };
+
+      const h = await  request(app.getServer())
+      .post('/login')
+      .send(userData).expect(200)
+      .then((response) => {
+        token = `Bearer ${response.body.jwtToken}`
+        
+      })
+      
+      const req = request(app.getServer())
+        .post('/logout');
+        req.set('Authorization', token)
+        .expect('Set-Cookie', /^Authorization=\;/);
+    });
+  });
 });
